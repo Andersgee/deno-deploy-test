@@ -1,4 +1,11 @@
 import { serve } from "https://deno.land/std@0.142.0/http/server.ts";
-import { somefunc } from "./thing.ts";
+import { randomAvatarSvgString } from "./lib/generator/index.ts";
 
-serve((_req: Request) => new Response(`Hello A World ${somefunc(3)}`));
+serve((_req: Request) => {
+  const svgString = randomAvatarSvgString();
+  return new Response(svgString, {
+    headers: {
+      "content-type": "image/svg+xml",
+    },
+  });
+});
